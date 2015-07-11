@@ -52,7 +52,6 @@ def transcribe_audio():
     transcription = request.values.get('TranscriptionText')
     weight = re.findall('\d+', transcription)
     url = "https://api.parse.com/1/classes/metrics"
-    weight = "200"
     data = {'weight': weight[0]}# just take the first array if multiple numbers
 
     headers = {
