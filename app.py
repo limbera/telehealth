@@ -50,15 +50,24 @@ def transcribe_audio():
     # print 'Transcribing audio'
     # transcription_text = request.values.get('TranscriptionText')
     # print "%s" % transcription_text
-    transcription_text = "101kg."
-    connection = httplib.HTTPSConnection('api.parse.com', 443)
-    connection.connect()
-    connection.request('POST', '/1/classes/metrics', json.dumps({
-           "weight": transcription_text,
-         }), {
-           "X-Parse-Application-Id": PARSE_APP_ID,
-           "X-Parse-REST-API-Key": PARSE_REST_API_KEY,
-           "Content-Type": "application/json"
-         })
+    # transcription_text = "101kg."
+    # connection = httplib.HTTPSConnection('api.parse.com', 443)
+    # connection.connect()
+    # connection.request('POST', '/1/classes/metrics', json.dumps({
+    #        "weight": transcription_text
+    #      }), {
+    #        "X-Parse-Application-Id": PARSE_APP_ID,
+    #        "X-Parse-REST-API-Key": PARSE_REST_API_KEY,
+    #        "Content-Type": "application/json"
+    #      })
+    payload = { 
+        "weight": "100" 
+    }
+    headers = {
+       "X-Parse-Application-Id": PARSE_APP_ID,
+       "X-Parse-REST-API-Key": PARSE_REST_API_KEY,
+       "Content-Type": "application/json"
+     }
+    r = requests.post("https://api.parse.com/1/classes/metrics", params=payload, headers=headers)
     return "Sucessfully added patient data"
 
