@@ -1,5 +1,6 @@
 import os, sys
 import json, httplib, urllib2
+import requests
 
 from urlparse import urlparse
 from flask import Flask, request
@@ -70,4 +71,7 @@ def transcribe_audio():
      }
     r = requests.post("https://api.parse.com/1/classes/metrics", params=payload, headers=headers)
     return "Sucessfully added patient data"
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
