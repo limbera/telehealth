@@ -63,6 +63,6 @@ def transcribe_audio():
     print "post was: %s" % r.content
     return "Sucessfully added patient data"
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
 
