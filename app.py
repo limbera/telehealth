@@ -8,9 +8,9 @@ from twilio.rest import TwilioRestClient
 from twilio.rest.resources import Connection
 from twilio.rest.resources.connection import PROXY_TYPE_HTTP
 
-proxy_url = os.environ.get("http_proxy")
-host, port = urlparse(proxy_url).netloc.split(":")
-Connection.set_proxy_info(host, int(port), proxy_type=PROXY_TYPE_HTTP)
+# proxy_url = os.environ.get("http_proxy")
+# host, port = urlparse(proxy_url).netloc.split(":")
+# Connection.set_proxy_info(host, int(port), proxy_type=PROXY_TYPE_HTTP)
 
 app = Flask(__name__)
 port = int(os.getenv('VCAP_APP_PORT', 8080))
@@ -43,7 +43,7 @@ def make_call():
 
 @app.route('/handleRecording', methods=['GET', 'POST'])
 def handle_recording():
-    return
+    return "Handling recording"
 
 
 @app.route('/handleTranscription', methods=['GET', 'POST'])
@@ -61,6 +61,7 @@ def transcribe_audio():
     #        "X-Parse-REST-API-Key": PARSE_REST_API_KEY,
     #        "Content-Type": "application/json"
     #      })
+    print "test"
     payload = { 
         "weight": "100" 
     }
@@ -68,8 +69,10 @@ def transcribe_audio():
        "X-Parse-Application-Id": PARSE_APP_ID,
        "X-Parse-REST-API-Key": PARSE_REST_API_KEY,
        "Content-Type": "application/json"
-     }
-    r = requests.post("https://api.parse.com/1/classes/metrics", params=payload, headers=headers)
+    }
+    print "pre post call" 
+    r = requests.post("https://api.parse.com/1/classes/metrics", headers=headers, params=payload)
+    print "post was: %s" % r.status_code
     return "Sucessfully added patient data"
 
 if __name__ == '__main__':
