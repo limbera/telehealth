@@ -39,54 +39,26 @@ def make_call():
     )
     return 'Making a phone call to +61419190104'
 
+
 @app.route('/handleRecording', methods=['GET', 'POST'])
 def handle_recording():
     return
-    # recording_url = request.values.get('RecordingUrl', None)
 
-    # connection = httplib.HTTPSConnection('api.parse.com', 443)
-    # connection.connect()
-
-    # # upload the file to Parse.com /files/ dir 
-    # data = urllib2.urlopen(recording_url).read();
-    # connection.request('POST', '/1/files/audio.wav',  data, {
-    #    "X-Parse-Application-Id": PARSE_APP_ID,
-    #    "X-Parse-REST-API-Key": PARSE_REST_API_KEY,
-    #    'Content-Type': "audio/x-wav"
-    # })
-    # result = json.loads(connection.getresponse().read())
-
-    # connection = httplib.HTTPSConnection('api.parse.com', 443)
-    # connection.connect()
-    # connection.request('POST', '/1/classes/audio_recording', json.dumps({
-    #        "transcription": "Testing",
-    #        "audio_file": {
-    #          "name": result['name'],
-    #          "__type": "File"
-    #        }
-    #      }), {
-    #        "X-Parse-Application-Id": PARSE_APP_ID,
-    #        "X-Parse-REST-API-Key": PARSE_REST_API_KEY,
-    #        "Content-Type": "application/json"
-    #      })
-    # result = json.loads(connection.getresponse().read())
-    # print result
-    # return 'File successfully uploaded' + str(result)
 
 @app.route('/handleTranscription', methods=['GET', 'POST'])
 def transcribe_audio():
     print 'Transcribing audio'
     transcription_text = request.values.get('TranscriptionText')
     print "%s" % transcription_text
+    transcription_text = "101 kg."
     connection = httplib.HTTPSConnection('api.parse.com', 443)
     connection.connect()
     connection.request('POST', '/1/classes/metrics', json.dumps({
-           "weight": transcription_text,
-           "phone": To,
+           "weight": transcription_text
          }), {
            "X-Parse-Application-Id": PARSE_APP_ID,
            "X-Parse-REST-API-Key": PARSE_REST_API_KEY,
            "Content-Type": "application/json"
          })
-    return "Sucessfully added patiend data"
+    return "Sucessfully added patient data"
 
