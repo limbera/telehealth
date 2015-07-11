@@ -47,14 +47,14 @@ def handle_recording():
 
 @app.route('/handleTranscription', methods=['GET', 'POST'])
 def transcribe_audio():
-    print 'Transcribing audio'
-    transcription_text = request.values.get('TranscriptionText')
-    print "%s" % transcription_text
-    transcription_text = "101 kg."
+    # print 'Transcribing audio'
+    # transcription_text = request.values.get('TranscriptionText')
+    # print "%s" % transcription_text
+    transcription_text = "101kg."
     connection = httplib.HTTPSConnection('api.parse.com', 443)
     connection.connect()
     connection.request('POST', '/1/classes/metrics', json.dumps({
-           "weight": transcription_text
+           "weight": transcription_text,
          }), {
            "X-Parse-Application-Id": PARSE_APP_ID,
            "X-Parse-REST-API-Key": PARSE_REST_API_KEY,
