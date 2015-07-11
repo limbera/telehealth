@@ -1,7 +1,12 @@
 import os, sys
 import json, httplib, urllib2
-from twilio.rest import TwilioRestClient
+
+from urlparse import urlparse
 from flask import Flask, request
+from twilio.rest import TwilioRestClient
+from twilio.rest.resources import Connection
+from twilio.rest.resources.connection import PROXY_TYPE_HTTP
+
 
 app = Flask(__name__)
 port = int(os.getenv('VCAP_APP_PORT', 8080))
