@@ -3,9 +3,9 @@ import json, httplib, urllib2
 
 from urlparse import urlparse
 from flask import Flask, request
-from twilio.rest import TwilioRestClient
 from twilio.rest.resources import Connection
 from twilio.rest.resources.connection import PROXY_TYPE_HTTP
+from twilio.rest import TwilioRestClient
 
 
 app = Flask(__name__)
