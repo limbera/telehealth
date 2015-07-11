@@ -1,6 +1,7 @@
 import os, sys
 import json, httplib, urllib2
 import requests
+import re
 
 from urlparse import urlparse
 from flask import Flask, request
@@ -48,31 +49,18 @@ def handle_recording():
 
 @app.route('/handleTranscription', methods=['GET', 'POST'])
 def transcribe_audio():
-    # print 'Transcribing audio'
-    # transcription_text = request.values.get('TranscriptionText')
-    # print "%s" % transcription_text
-    # transcription_text = "101kg."
-    # connection = httplib.HTTPSConnection('api.parse.com', 443)
-    # connection.connect()
-    # connection.request('POST', '/1/classes/metrics', json.dumps({
-    #        "weight": transcription_text
-    #      }), {
-    #        "X-Parse-Application-Id": PARSE_APP_ID,
-    #        "X-Parse-REST-API-Key": PARSE_REST_API_KEY,
-    #        "Content-Type": "application/json"
-    #      })
-    print "test"
-    payload = { 
-        "weight": "100" 
-    }
+    transcription = request.values.get('TranscriptionText')
+    weight = re.findall('\d+', transcription)[0] # just take the first array if multiple numbers
+    url = "https://api.parse.com/1/classes/metrics"
+    data = {'weight': weight}
+
     headers = {
-       "X-Parse-Application-Id": PARSE_APP_ID,
-       "X-Parse-REST-API-Key": PARSE_REST_API_KEY,
-       "Content-Type": "application/json"
+       'X-Parse-Application-Id': PARSE_APP_ID,
+       'X-Parse-REST-API-Key': PARSE_REST_API_KEY,
+       'Content-Type': 'application/json'
     }
-    print "pre post call" 
-    r = requests.post("https://api.parse.com/1/classes/metrics", headers=headers, params=payload)
-    print "post was: %s" % r.status_code
+    r = requests.post(url, data=json.dumps(data), headers=headers)
+    print "post was: %s" % r.content
     return "Sucessfully added patient data"
 
 if __name__ == '__main__':
