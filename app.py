@@ -42,7 +42,9 @@ def make_call():
 
 @app.route('/handleTranscription', methods=['GET', 'POST'])
 def transcribe_audio():
+    print 'Transcribing audio'
     transcription_text = request.values.get('TranscriptionText')
+    print "%s" % transcription_text
     connection = httplib.HTTPSConnection('api.parse.com', 443)
     connection.connect()
     connection.request('POST', '/1/classes/metrics', json.dumps({
