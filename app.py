@@ -50,8 +50,10 @@ def handle_recording():
 @app.route('/handleTranscription', methods=['GET', 'POST'])
 def transcribe_audio():
     transcription = request.values.get('TranscriptionText')
-    weight = re.findall('\d+', transcription)[0] # just take the first array if multiple numbers
+    print "TRANSCRIPTION %s" % transcription
+    weight = re.findall('\d+', transcription[])[0] # just take the first array if multiple numbers
     url = "https://api.parse.com/1/classes/metrics"
+    weight = "100"
     data = {'weight': weight}
 
     headers = {
