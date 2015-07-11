@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <Response> 
-    <Say>Hi there! How are you feeling today?</Say>
+    <Say>Hi there! How much do you weigh?</Say>
     <Record 
         action="http://untangle.pythonanywhere.com/handleRecording" 
         method="GET"
